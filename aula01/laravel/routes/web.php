@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::get('/teste/{teste}', function ($teste) {
     echo $teste;
 });
+Route::get('/usuarios', 'UsuariosController@index');
