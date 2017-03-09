@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/teste/{teste}', function ($teste) {
+    echo $teste;
+});
