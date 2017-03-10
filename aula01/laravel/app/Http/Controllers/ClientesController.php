@@ -9,7 +9,8 @@ use Redirect;
 class ClientesController extends Controller
 {
     public function index(){
-      return view('clientes/lista');
+      $clientes = Cliente::get();
+      return view('clientes/lista',['clientes' => $clientes]);
     }
     public function novo(){
       return view('clientes/formulario');
@@ -22,6 +23,26 @@ class ClientesController extends Controller
       \Session::flash('mensagem_sucesso', 'Cliente cadastrado com Sucesso!');
 
       return Redirect::to('clientes/novo');
+    }
+    public function editar($id){
+      $cliente = Cliente::findOrFail($id);
+      return view('clientes/formulario',['cliente' => $cliente]);
+    }
+    public function atualizar($id, Request $request){
+      $cliente = Cliente::findOrFail($id);
+      $cliente->update($request->all());
+
+      \Session::flash('mensagem_sucesso', 'Cliente atualizado com Sucesso!');
+
+      return Redirect::to('clientes/'.$cliente->id.'/editar');
+    }
+    public function deletar($id){
+      $cliente = Cliente::findOrFail($id);
+      $cliente->delete();
+
+      \Session::flash('mensagem_sucesso', 'Cliente deletado com Sucesso!');
+
+      return Redirect::to('clientes');
     }
 
 }

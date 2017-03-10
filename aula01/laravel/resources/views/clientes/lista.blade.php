@@ -11,7 +11,33 @@
                 </div>
 
                 <div class="panel-body">
-                    Listagem de Clientes
+                  @if(Session::has('mensagem_sucesso'))
+                    <div class='alert alert-success'>{{Session::get('mensagem_sucesso')}}</div>
+                  @endif
+
+                    <table class="table">
+                      <thead>
+                        <th>Nome</th>
+                        <th>Endereço</th>
+                        <th>Número</th>
+                        <th>Ações</th>
+                      </thead>
+                      <tbody>
+                        @foreach($clientes as $cliente)
+                        <tr>
+                          <td>{{$cliente->nome}}</td>
+                          <td>{{$cliente->endereco}}</td>
+                          <td>{{$cliente->numero}}</td>
+                          <td>
+                            <a href="clientes/{{$cliente->id}}/editar" class="btn btn-sm btn-primary">Editar</a>
+                            {!! Form::open(['method' => 'DELETE', 'url' => 'clientes/'.$cliente->id, 'style' => 'display: inline;']) !!}
+                            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+                            {!! Form::close() !!}
+                          </td>
+                        </tr>
+                      @endforeach
+                      </tbody>
+                    </table>
                 </div>
             </div>
         </div>
