@@ -11,10 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 Route::get('/teste/{teste}', function ($teste) {
     echo $teste;
 });
 Route::get('/usuarios', 'UsuariosController@index');
+
+Route::get('/clientes', 'ClientesController@index');
+Route::get('/clientes/novo', 'ClientesController@novo');
+
+Route::get('/', 'HomeController@index');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index');
