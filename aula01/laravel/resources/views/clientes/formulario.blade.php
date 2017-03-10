@@ -7,11 +7,27 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                   Dados do Cliente
-                  <a class="pull-right" href="{{url('clientes/novo')}}">Lista de Cliente</a>
+                  <a class="pull-right" href="{{url('clientes')}}">Lista de Cliente</a>
                 </div>
 
                 <div class="panel-body">
-                    Formulário
+                  @if(Session::has('mensagem_sucesso'))
+                    <div class='alert alert-success'>{{Session::get('mensagem_sucesso')}}</div>
+                  @endif
+                  {!! Form::open(['action' => 'ClientesController@salvar']) !!}
+
+                  {!! Form::label('nome', 'Nome') !!}
+                  {!! Form::input('text', 'nome', '',['class' => 'form-control','autofocus', 'placeholder' => 'Nome'])!!}
+
+                  {!! Form::label('endereco', 'Endereço') !!}
+                  {!! Form::input('text', 'endereco', '',['class' => 'form-control', 'placeholder' => 'Endereço'])!!}
+
+                  {!! Form::label('numero', 'Número') !!}
+                  {!! Form::input('text', 'numero', '',['class' => 'form-control', 'placeholder' => 'Número'])!!}
+
+                  {!! Form::submit('Salvar',['class' => 'btn btn-primary'])!!}
+
+                  {!! Form::close() !!}
                 </div>
             </div>
         </div>
